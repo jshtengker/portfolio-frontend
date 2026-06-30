@@ -1,25 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Sora', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
-  --color-surface: #18181b;
-  --color-surface-alt: #1f1f23;
-  --color-border: #27272a;
-  --color-accent: #f59e0b;
-  --color-accent-dim: #a16207;
+
+  --color-bg: #0d0c0a;
+  --color-surface: #181614;
+  --color-surface-alt: #201e1b;
+  --color-border: #2b2823;
+  --color-accent: #c8864a;
+  --color-accent-dim: #9a6a38;
 }
 
 body {
-  @apply bg-[#0a0a0b] text-zinc-100 font-sans antialiased;
-  background-image: repeating-linear-gradient(
-    45deg,
-    transparent,
-    transparent 24px,
-    rgba(255, 255, 255, 0.04) 24px,
-    rgba(255, 255, 255, 0.04) 25px
-  );
+  @apply bg-bg text-[#e4e4e7] font-body antialiased;
 }
 
 ::selection {
@@ -34,4 +30,16 @@ body {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-bg;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-border rounded-full;
 }
