@@ -18,11 +18,12 @@
 </template>
 
 <script setup lang="ts">
-const year = new Date().getFullYear();
+const appConfig = useAppConfig()
+const year = new Date().getFullYear()
 
 const links = [
-  { label: 'GitHub', url: '#' },
-  { label: 'LinkedIn', url: '#' },
-  { label: 'Email', url: 'mailto:hello@example.com' },
-];
+  { label: 'GitHub', url: appConfig.portfolio.social.github },
+  { label: 'LinkedIn', url: appConfig.portfolio.social.linkedin },
+  { label: 'Email', url: `mailto:${appConfig.portfolio.social.email}` },
+]
 </script>
