@@ -5,7 +5,7 @@
         <p class="font-mono text-sm text-accent mb-2">&gt; whoami</p>
         <div class="grid md:grid-cols-5 gap-12 mt-6">
           <div class="md:col-span-3 space-y-4">
-            <h2 class="text-2xl font-bold tracking-tight">
+            <h2 class="text-2xl font-bold tracking-tight font-sans">
               Backend engineer by trade
             </h2>
             <p class="text-zinc-400 leading-relaxed">
@@ -32,10 +32,11 @@
 </template>
 
 <script setup lang="ts">
+const appConfig = useAppConfig()
+
 const stats = [
   { label: 'focus', value: 'Backend / APIs' },
   { label: 'stack', value: 'Go, TypeScript, Postgres' },
-  { label: 'exp', value: 'x years' },
-  { label: 'location', value: 'Earth' },
-];
+  { label: 'location', value: 'Indonesia' },
+]
 </script>
