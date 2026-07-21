@@ -7,4 +7,5 @@ export interface Project {
   tags: string[]
   year: string
   to: string
+  githubUrl?: string
 }

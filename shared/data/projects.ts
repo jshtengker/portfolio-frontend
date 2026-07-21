@@ -2,6 +2,34 @@ import type { Project } from '#shared/types/project'
 
 export const projects: Project[] = [
   {
+    id: 'zetryn',
+    title: 'Zetryn — Incident Intelligence Platform',
+    description:
+      'Automated telemetry ingestion, cross-service event correlation, and incident detection platform.',
+    fullDescription:
+      'An Incident Intelligence Platform designed to ingest OpenTelemetry signals (logs, metrics, and traces), correlate cross-service telemetry events asynchronously, and automatically detect and alert on incidents to minimize MTTD and MTTR.',
+    details:
+      'Engineered with Go for high-throughput ingestion and background correlation workers, PostgreSQL for durable persistence, Redis for asynchronous task queues, and React for the operator console dashboard.',
+    tags: ['Go', 'OpenTelemetry', 'PostgreSQL', 'Redis', 'React', 'Docker'],
+    year: '2026',
+    to: '/projects/zetryn',
+    githubUrl: 'https://github.com/jshtengker/zetryn',
+  },
+  {
+    id: 'speech-to-text',
+    title: 'Local Speech-to-Text Studio',
+    description:
+      'Privacy-first audio & video transcription app powered by faster-whisper with real-time SSE streaming.',
+    fullDescription:
+      'A high-performance, local speech-to-text web application powered by OpenAI Whisper models via faster-whisper. Features real-time line-by-line SSE streaming, dynamic model selection, drag-and-drop media upload, and TXT/SRT export capabilities with zero data leaving the device.',
+    details:
+      'Built with Python and FastAPI on the backend for GPU/CPU accelerated CTranslate2 inference and SSE streaming endpoints. The frontend is built with React 18, TypeScript, Vite, and TailwindCSS for a responsive dark UI.',
+    tags: ['Python', 'FastAPI', 'Whisper', 'React', 'TypeScript', 'TailwindCSS'],
+    year: '2026',
+    to: '/projects/speech-to-text',
+    githubUrl: 'https://github.com/jshtengker/speech-to-text',
+  },
+  {
     id: 'alpha',
     title: 'Distributed Queue Service',
     description:
