@@ -29,6 +29,7 @@ export function useTypeWriter(strings: string[], {
 
   const tick = () => {
     const current = strings[index.value];
+    if (!current) return;
 
     if (!deleting.value) {
       if (charIndex.value < current.length) {
