@@ -1,6 +1,6 @@
 <template>
   <SectionReveal>
-    <section class="py-24 px-6">
+    <section class="py-16 sm:py-24 px-6">
       <div class="max-w-7xl mx-auto">
         <p class="font-mono text-sm text-accent mb-2">&gt; whoami</p>
         <div class="grid md:grid-cols-5 gap-12 mt-6">
@@ -19,7 +19,7 @@
               production.
             </p>
           </div>
-          <div class="md:col-span-2 border border-border rounded-lg p-5 bg-surface space-y-3">
+          <div class="md:col-span-2 border border-border rounded-lg p-5 bg-surface space-y-3 transition-all duration-300 hover:border-accent-dim/60 hover:shadow-[0_0_20px_rgba(200,134,74,0.15)]">
             <div v-for="stat in stats" :key="stat.label" class="flex items-center justify-between">
               <span class="text-sm text-zinc-500 font-mono">{{ stat.label }}</span>
               <span class="text-sm font-medium">{{ stat.value }}</span>
@@ -32,8 +32,6 @@
 </template>
 
 <script setup lang="ts">
-const appConfig = useAppConfig()
-
 const stats = [
   { label: 'focus', value: 'Backend / APIs' },
   { label: 'stack', value: 'Go, TypeScript, Postgres' },

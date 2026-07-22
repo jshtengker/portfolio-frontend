@@ -1,7 +1,8 @@
 <template>
   <section class="py-24 px-6">
     <div class="max-w-3xl mx-auto">
-      <NuxtLink to="/projects"
+      <NuxtLink
+to="/projects"
         class="inline-flex items-center gap-1 text-sm text-zinc-500 font-mono hover:text-accent transition-colors mb-8">
         &larr; Back to projects
       </NuxtLink>
@@ -21,7 +22,8 @@
         </p>
 
         <div class="flex flex-wrap gap-1.5 mb-8">
-          <span v-for="tag in project?.tags" :key="tag"
+          <span
+v-for="tag in project?.tags" :key="tag"
             class="px-2 py-0.5 text-xs rounded bg-surface-alt text-zinc-500 font-mono">
             {{ tag }}
           </span>
@@ -36,7 +38,6 @@
 </template>
 
 <script setup lang="ts">
-import type { Project } from '#shared/types/project'
 import { projects } from '#shared/data/projects'
 
 const route = useRoute()
