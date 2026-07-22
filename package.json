@@ -2,12 +2,17 @@
   "name": "portfolio-frontend",
   "type": "module",
   "private": true,
+  "packageManager": "pnpm@10.28.0",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test:e2e": "playwright test",
+    "audit:site": "node ./scripts/audit.mjs"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.18",
@@ -15,5 +20,16 @@
     "tailwindcss": "^4.1.18",
     "vue": "^3.5.28",
     "vue-router": "^4.6.4"
+  },
+  "devDependencies": {
+    "@iconify-json/lucide": "^1.2.25",
+    "@iconify-json/simple-icons": "^1.2.34",
+    "@nuxt/eslint": "^1.1.0",
+    "@nuxt/icon": "^1.10.3",
+    "@playwright/test": "^1.50.0",
+    "@types/node": "^22.13.1",
+    "eslint": "^9.20.0",
+    "typescript": "^5.7.3",
+    "vue-tsc": "^2.2.0"
   }
 }

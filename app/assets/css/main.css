@@ -12,14 +12,21 @@
   --color-border: #2b2823;
   --color-accent: #c8864a;
   --color-accent-dim: #9a6a38;
+  --color-accent-blue: #3b82f6;
+  --color-accent-blue-dim: #1d4ed8;
 }
 
 body {
-  @apply bg-bg text-[#e4e4e7] font-body antialiased;
+  background-color: var(--color-bg);
+  color: #e4e4e7;
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  @apply bg-accent/20 text-accent;
+  background-color: rgba(200, 134, 74, 0.2);
+  color: var(--color-accent);
 }
 
 .fade-enter-active,
@@ -37,9 +44,30 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-bg;
+  background-color: var(--color-bg);
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-border rounded-full;
+  background-color: var(--color-border);
+  border-radius: 9999px;
 }
+
+.bg-grid-pattern {
+  background-image: radial-gradient(rgba(200, 134, 74, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.bg-radial-glow {
+  background: radial-gradient(circle at 50% 30%, rgba(200, 134, 74, 0.08) 0%, rgba(13, 12, 10, 0) 70%);
+}
+
+.card-glow-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-glow-hover:hover {
+  border-color: rgba(154, 106, 56, 0.6);
+  box-shadow: 0 0 25px rgba(200, 134, 74, 0.18);
+}
+
+

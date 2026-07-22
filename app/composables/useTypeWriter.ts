@@ -8,9 +8,9 @@ export function useTypeWriter(strings: string[], {
   const cursor = ref(true);
   const isTyping = ref(true);
 
-  let index = ref(0);
-  let charIndex = ref(0);
-  let deleting = ref(false);
+  const index = ref(0);
+  const charIndex = ref(0);
+  const deleting = ref(false);
   let blinkTimer: ReturnType<typeof setInterval> | null = null;
   let typeTimer: ReturnType<typeof setTimeout> | null = null;
 
@@ -29,6 +29,7 @@ export function useTypeWriter(strings: string[], {
 
   const tick = () => {
     const current = strings[index.value];
+    if (!current) return;
 
     if (!deleting.value) {
       if (charIndex.value < current.length) {

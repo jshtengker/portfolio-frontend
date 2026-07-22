@@ -5,9 +5,10 @@ export default defineAppConfig({
     tagline: 'Backend-focused software engineer. I build APIs, services, and systems that are reliable, observable, and actually ship.',
     url: 'https://joshua.dev',
     social: {
-      github: '#',
-      linkedin: '#',
-      email: 'hello@joshua.dev',
+      github: 'https://github.com/jshtengker',
+      linkedin: 'https://www.linkedin.com/in/joshuatengker/',
+      instagram: 'https://instagram.com/jshtngkr',
+      email: 'leonardotengker@gmail.com',
     },
   },
 })

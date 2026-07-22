@@ -1,7 +1,8 @@
 <template>
   <div>
-    <NavBar />
-    <main class="pt-16 min-h-screen">
+    <RadialHudNav />
+
+    <main class="pt-6 pb-28 min-h-screen">
       <slot />
     </main>
     <ContactFooter />
