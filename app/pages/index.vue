@@ -5,8 +5,8 @@
     <section class="px-6 py-12 lg:py-20 relative z-10">
       <div class="max-w-7xl mx-auto w-full lg:grid lg:grid-cols-12 lg:gap-12 lg:items-center">
         <div class="lg:col-span-7 space-y-6">
-          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 text-emerald-400 text-xs font-mono">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent-blue/30 bg-accent-blue/10 text-accent-blue text-xs font-mono">
+            <span class="w-2 h-2 rounded-full bg-accent-blue animate-pulse" />
             <span>Available for new projects</span>
           </div>
 

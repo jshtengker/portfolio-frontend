@@ -37,7 +37,7 @@
             <div
 v-for="(exp, i) in experience" :key="i"
               class="border-l-2 border-border pl-5 pb-6 last:pb-0 relative">
-              <div class="absolute left-[-5px] top-1 w-2 h-2 rounded-full bg-accent" />
+              <div class="absolute -left-1.25 top-1 w-2 h-2 rounded-full bg-accent" />
               <div class="flex items-start justify-between mb-1">
                 <h3 class="font-medium font-sans">{{ exp.role }}</h3>
                 <span class="text-xs text-zinc-500 font-mono shrink-0 ml-4">{{ exp.period }}</span>
