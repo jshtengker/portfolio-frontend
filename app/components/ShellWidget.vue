@@ -1,12 +1,10 @@
 <template>
   <div class="relative group w-full max-w-lg">
-    <!-- Balanced Glow Visible Always, Intensifies on Hover -->
     <div
       class="absolute -inset-1 rounded-xl bg-accent/15 blur-md opacity-60 group-hover:opacity-100 group-hover:blur-lg transition-all duration-500 pointer-events-none"
       :class="{ 'opacity-0': !mounted }"
     />
 
-    <!-- Main Terminal Container -->
     <div
       class="relative border border-border rounded-lg bg-surface overflow-hidden font-mono text-sm w-full shadow-[0_0_20px_rgba(200,134,74,0.12)] transition-all duration-300 group-hover:border-accent-dim/60 group-hover:shadow-[0_0_30px_rgba(200,134,74,0.22)]"
       :class="{ 'opacity-0': !mounted }"
@@ -17,7 +15,7 @@
         <div class="flex items-center gap-1.5">
           <span class="w-2.5 h-2.5 rounded-full bg-red-500/70" />
           <span class="w-2.5 h-2.5 rounded-full bg-amber-500/70" />
-          <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/70" />
+          <span class="w-2.5 h-2.5 rounded-full bg-accent-blue/70" />
           <span class="ml-2 text-xs text-accent-dim font-sans">terminal — ~/portfolio</span>
         </div>
         <span class="text-[10px] text-zinc-500 font-mono hidden sm:inline">type 'help' to interact</span>

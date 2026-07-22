@@ -1,17 +1,15 @@
 import tailwindcss from "@tailwindcss/vite";
-import type { Plugin } from "vite";
-
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: ['@nuxt/icon', '@nuxt/eslint'],
   compatibilityDate: "2025-07-15",
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   devServer: {
     port: 9000,
   },
   css: ["~/assets/css/main.css"],
   vite: {
-    plugins: [tailwindcss() as unknown as Plugin],
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    plugins: [tailwindcss() as any],
   },
   app: {
     head: {

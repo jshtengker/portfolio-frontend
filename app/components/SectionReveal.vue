@@ -13,7 +13,7 @@ const visible = ref(false)
 onMounted(() => {
   const observer = new IntersectionObserver(
     ([entry]) => {
-      if (entry.isIntersecting) {
+      if (entry?.isIntersecting) {
         visible.value = true
         observer.disconnect()
       }
@@ -23,7 +23,5 @@ onMounted(() => {
   if (el.value) observer.observe(el.value)
 })
 
-onUnmounted(() => {
-  // observer is disconnected on intersection; safe to leave
-})
+onUnmounted(() => {})
 </script>
