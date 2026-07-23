@@ -13,6 +13,17 @@ export default defineNuxtConfig({
   },
   app: {
     head: {
+      htmlAttrs: {
+        lang: 'en',
+      },
+      title: 'Joshua Tengker | Backend Software Engineer',
+      titleTemplate: '%s | Joshua Tengker',
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'theme-color', content: '#09090b' },
+        { name: 'author', content: 'Joshua Tengker' },
+      ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
       ],

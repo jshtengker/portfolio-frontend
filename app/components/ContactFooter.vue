@@ -1,6 +1,6 @@
 <template>
   <footer class="border-t border-border mt-24">
-    <div class="max-w-7xl mx-auto px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-3 flex flex-col sm:flex-row items-center justify-between gap-4">
       <span class="text-sm text-zinc-600 font-mono">
         ~/portfolio
       </span>

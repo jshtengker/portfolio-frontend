@@ -136,6 +136,9 @@ const router = useRouter()
 const isOpen = ref(false)
 const hoveredIndex = ref(0)
 
+const appConfig = useAppConfig()
+const copied = ref(false)
+
 interface IndexItem {
   id: string
   number: string
@@ -148,7 +151,7 @@ interface IndexItem {
   glowClass: string
 }
 
-const indexItems: IndexItem[] = [
+const indexItems = computed<IndexItem[]>(() => [
   {
     id: 'home',
     number: '01',
@@ -182,14 +185,14 @@ const indexItems: IndexItem[] = [
   {
     id: 'contact',
     number: '04',
-    title: 'GET IN TOUCH',
-    subtitle: 'Email, GitHub & Social Links',
-    description: 'Direct communication channels, email copy trigger, and social profile links for collaboration.',
+    title: copied.value ? 'COPIED TO CLIPBOARD! ✓' : 'GET IN TOUCH',
+    subtitle: copied.value ? appConfig.portfolio.social.email : 'Email, GitHub & Social Links',
+    description: copied.value ? 'Email address copied to your clipboard successfully!' : 'Direct communication channels, email copy trigger, and social profile links for collaboration.',
     action: () => copyEmail(),
-    tags: ['Email', 'GitHub', 'LinkedIn'],
-    glowClass: 'bg-linear-to-r from-accent-blue to-cyan-400',
+    tags: copied.value ? ['Copied! ✓', appConfig.portfolio.social.email] : ['Email', 'GitHub', 'LinkedIn'],
+    glowClass: copied.value ? 'bg-linear-to-r from-emerald-500 to-teal-400' : 'bg-linear-to-r from-accent-blue to-cyan-400',
   },
-]
+])
 
 const activeIndexNumber = computed(() => {
   if (route.path === '/') return '01'
@@ -199,22 +202,28 @@ const activeIndexNumber = computed(() => {
 })
 
 const activePreviewItem = computed<IndexItem>(() => {
-  return indexItems[hoveredIndex.value] ?? indexItems[0]!
+  return indexItems.value[hoveredIndex.value] ?? indexItems.value[0]!
 })
 
 const handleNavigate = (item: IndexItem) => {
   if (item.to) {
     router.push(item.to)
+    isOpen.value = false
   } else if (item.action) {
     item.action()
+    setTimeout(() => {
+      isOpen.value = false
+    }, 1200)
   }
-  isOpen.value = false
 }
 
 const copyEmail = async () => {
   try {
-    await navigator.clipboard.writeText('hello@joshuatengker.com')
-    alert('Email copied to clipboard!')
+    await navigator.clipboard.writeText(appConfig.portfolio.social.email)
+    copied.value = true
+    setTimeout(() => {
+      copied.value = false
+    }, 2000)
   } catch (e) {
     console.error(e)
   }

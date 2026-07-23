@@ -1,5 +1,5 @@
 <template>
-  <section class="py-24 px-6">
+  <section class="py-24 px-6 sm:px-8 lg:px-12">
     <div class="max-w-7xl mx-auto">
       <p class="font-mono text-sm text-accent mb-2">&gt; projects</p>
       <h1 class="text-3xl font-bold tracking-tight mt-6 font-sans">
@@ -34,7 +34,19 @@ function onModalClose() {
   originRect.value = null
 }
 
+useSeoMeta({
+  title: 'Projects',
+  description: 'Featured software engineering projects, open-source work, and backend system designs by Joshua Tengker.',
+  ogTitle: 'Projects | Joshua Tengker',
+  ogDescription: 'Featured software engineering projects, open-source work, and backend system designs by Joshua Tengker.',
+  ogUrl: 'https://jshtngkr.pages.dev/projects',
+  ogType: 'website',
+  twitterCard: 'summary_large_image',
+})
+
 useHead({
-  title: 'Projects — Joshua',
+  link: [
+    { rel: 'canonical', href: 'https://jshtngkr.pages.dev/projects' },
+  ],
 })
 </script>

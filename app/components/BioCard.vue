@@ -1,6 +1,6 @@
 <template>
   <SectionReveal>
-    <section class="py-16 sm:py-24 px-6">
+    <section class="py-16 sm:py-24 px-6 sm:px-8 lg:px-12">
       <div class="max-w-7xl mx-auto">
         <p class="font-mono text-sm text-accent mb-2">&gt; whoami</p>
         <div class="grid md:grid-cols-5 gap-12 mt-6">
