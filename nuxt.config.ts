@@ -23,6 +23,7 @@ export default defineNuxtConfig({
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'theme-color', content: '#09090b' },
         { name: 'author', content: 'Joshua Tengker' },
+        { name: 'google-site-verification', content: 'google373c6438e429bba0' },
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
