@@ -2,7 +2,7 @@
   <div class="relative overflow-hidden bg-radial-glow">
     <div class="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none" />
 
-    <section class="px-6 py-12 lg:py-20 relative z-10">
+    <section class="px-6 sm:px-8 lg:px-12 py-12 lg:py-20 relative z-10">
       <div class="max-w-7xl mx-auto w-full lg:grid lg:grid-cols-12 lg:gap-12 lg:items-center">
         <div class="lg:col-span-7 space-y-6">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent-blue/30 bg-accent-blue/10 text-accent-blue text-xs font-mono">
@@ -57,7 +57,7 @@ to="/about"
     <TechGrid />
 
     <SectionReveal>
-      <section class="py-16 sm:py-24 px-6 border-t border-border">
+      <section class="py-16 sm:py-24 px-6 sm:px-8 lg:px-12 border-t border-border">
         <div class="max-w-7xl mx-auto">
           <p class="font-mono text-sm text-accent mb-2">&gt; featured work</p>
           <h2 class="text-2xl font-bold tracking-tight mt-6 font-sans">
@@ -108,11 +108,22 @@ function onModalClose() {
 }
 
 useSeoMeta({
-  title: 'Joshua — Software Engineer',
+  title: 'Joshua Tengker | Backend Software Engineer',
+  titleTemplate: null,
   description: appConfig.portfolio?.tagline || 'Backend-focused software engineer building reliable APIs and distributed systems.',
-  ogTitle: 'Joshua — Software Engineer Portfolio',
+  ogTitle: 'Joshua Tengker | Backend Software Engineer Portfolio',
   ogDescription: appConfig.portfolio?.tagline || 'Backend-focused software engineer building reliable APIs and distributed systems.',
+  ogUrl: 'https://jshtngkr.pages.dev',
+  ogType: 'website',
   twitterCard: 'summary_large_image',
+  twitterTitle: 'Joshua Tengker | Backend Software Engineer Portfolio',
+  twitterDescription: appConfig.portfolio?.tagline || 'Backend-focused software engineer building reliable APIs and distributed systems.',
+})
+
+useHead({
+  link: [
+    { rel: 'canonical', href: 'https://jshtngkr.pages.dev' },
+  ],
 })
 </script>
 

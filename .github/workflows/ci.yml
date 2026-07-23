@@ -26,9 +26,6 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Run Nuxt prepare
-        run: npx nuxi prepare
-
       - name: Run ESLint linter
         run: pnpm lint
 

@@ -45,7 +45,19 @@ const id = route.params.id as string
 
 const project = computed(() => projects.find(p => p.id === id))
 
+useSeoMeta({
+  title: computed(() => project.value?.title || 'Project Details'),
+  description: computed(() => project.value?.description || 'Software project details by Joshua Tengker.'),
+  ogTitle: computed(() => `${project.value?.title || 'Project'} | Joshua Tengker`),
+  ogDescription: computed(() => project.value?.description || 'Software project details by Joshua Tengker.'),
+  ogUrl: computed(() => `https://jshtngkr.pages.dev/projects/${id}`),
+  ogType: 'article',
+  twitterCard: 'summary_large_image',
+})
+
 useHead({
-  title: `${project.value?.title || 'Project'} — Joshua`,
+  link: [
+    { rel: 'canonical', href: computed(() => `https://jshtngkr.pages.dev/projects/${id}`) },
+  ],
 })
 </script>

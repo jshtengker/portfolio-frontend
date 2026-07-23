@@ -1,6 +1,6 @@
 <template>
   <SectionReveal>
-    <section class="py-16 sm:py-24 px-6 border-t border-border">
+    <section class="py-16 sm:py-24 px-6 sm:px-8 lg:px-12 border-t border-border">
       <div class="max-w-7xl mx-auto">
         <p class="font-mono text-sm text-accent mb-2">&gt; which tech</p>
         <h2 class="text-2xl font-bold tracking-tight mt-6 font-sans">
