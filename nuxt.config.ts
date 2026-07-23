@@ -26,7 +26,9 @@ export default defineNuxtConfig({
         { name: 'google-site-verification', content: 'google373c6438e429bba0' },
       ],
       link: [
+        { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
+        { rel: 'shortcut icon', href: '/favicon.ico' },
       ],
     },
   },
