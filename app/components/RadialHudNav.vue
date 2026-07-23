@@ -34,7 +34,8 @@
           type="button"
           class="group relative flex items-center justify-center w-11 h-11 rounded-full bg-surface/95 border border-border text-zinc-300 backdrop-blur-xl shadow-xl shadow-black/80 hover:scale-110 hover:border-accent-blue hover:text-accent-blue transition-all duration-300"
           :class="[
-            isOpen ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-50 pointer-events-none'
+            isOpen ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-50 pointer-events-none',
+            node.id === 'contact' && copied ? 'border-accent! text-accent! bg-accent/20 shadow-accent/30' : ''
           ]"
           :title="node.label"
           @click="handleActionClick(node)"
@@ -42,9 +43,10 @@
           <Icon :name="node.icon" class="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
 
           <div
-            class="absolute right-14 top-1/2 -translate-y-1/2 px-2.5 py-1 rounded-md bg-surface-alt border border-border text-xs font-mono font-medium text-zinc-200 shadow-xl opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 pointer-events-none whitespace-nowrap flex items-center gap-1.5"
+            class="absolute right-14 top-1/2 -translate-y-1/2 px-2.5 py-1 rounded-md bg-surface-alt border text-xs font-mono font-medium shadow-xl opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-200 pointer-events-none whitespace-nowrap flex items-center gap-1.5"
+            :class="node.id === 'contact' && copied ? 'border-accent/50 text-accent' : 'border-border text-zinc-200'"
           >
-            <span class="w-1.5 h-1.5 rounded-full bg-accent-blue" />
+            <span class="w-1.5 h-1.5 rounded-full" :class="node.id === 'contact' && copied ? 'bg-accent' : 'bg-accent-blue'" />
             {{ node.label }}
           </div>
         </button>
@@ -86,6 +88,7 @@
 
 <script setup lang="ts">
 const route = useRoute()
+const appConfig = useAppConfig()
 
 const isOpen = ref(false)
 const copied = ref(false)
@@ -98,16 +101,16 @@ interface HudNode {
   action?: () => void
 }
 
-const hudNodes: HudNode[] = [
+const hudNodes = computed<HudNode[]>(() => [
   { id: 'home', label: 'Home', to: '/', icon: 'lucide:home' },
   { id: 'projects', label: 'Projects', to: '/projects', icon: 'lucide:folder-git-2' },
   { id: 'about', label: 'About', to: '/about', icon: 'lucide:user' },
   { id: 'top', label: 'Scroll Top', icon: 'lucide:arrow-up', action: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
-  { id: 'contact', label: 'Copy Email', icon: 'lucide:mail', action: () => copyEmail() },
-]
+  { id: 'contact', label: copied.value ? 'Copied!' : 'Copy Email', icon: copied.value ? 'lucide:check' : 'lucide:mail', action: () => copyEmail() },
+])
 
 const getNodeStyle = (index: number) => {
-  const total = hudNodes.length
+  const total = hudNodes.value.length
   const startAngle = 180
   const endAngle = 270
   const step = (endAngle - startAngle) / (total - 1)
@@ -136,14 +139,22 @@ const handleActionClick = (node: HudNode) => {
   if (node.action) {
     node.action()
   }
-  isOpen.value = false
+  if (node.id === 'contact') {
+    setTimeout(() => {
+      isOpen.value = false
+    }, 1200)
+  } else {
+    isOpen.value = false
+  }
 }
 
 const copyEmail = async () => {
   try {
-    await navigator.clipboard.writeText('hello@joshuatengker.com')
+    await navigator.clipboard.writeText(appConfig.portfolio.social.email)
     copied.value = true
-    alert('Email copied to clipboard!')
+    setTimeout(() => {
+      copied.value = false
+    }, 2000)
   } catch (e) {
     console.error('Failed to copy email', e)
   }

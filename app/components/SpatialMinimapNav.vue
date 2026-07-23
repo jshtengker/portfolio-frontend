@@ -41,14 +41,16 @@
             :to="node.to"
             class="group/node relative flex flex-col justify-between p-2 rounded-md border transition-all duration-300 text-left"
             :class="[
-              activeNodeId === node.id
-                ? 'bg-accent-blue/20 border-accent-blue text-accent-blue shadow-md shadow-accent-blue/20'
-                : 'bg-surface/80 border-border text-zinc-400 hover:border-accent-blue/50 hover:text-zinc-200'
+              copied && node.id === 'contact'
+                ? 'bg-emerald-500/20 border-emerald-500 text-emerald-400 shadow-md shadow-emerald-500/20'
+                : activeNodeId === node.id
+                  ? 'bg-accent-blue/20 border-accent-blue text-accent-blue shadow-md shadow-accent-blue/20'
+                  : 'bg-surface/80 border-border text-zinc-400 hover:border-accent-blue/50 hover:text-zinc-200'
             ]"
             @click="handleNodeClick(node)"
           >
             <div class="flex items-center justify-between text-[10px] font-mono leading-none">
-              <span class="text-zinc-500 font-semibold group-hover/node:text-accent-blue transition-colors">{{ node.coord }}</span>
+              <span class="text-zinc-500 font-semibold group-hover/node:text-accent-blue transition-colors" :class="{ 'text-emerald-400!': copied && node.id === 'contact' }">{{ node.coord }}</span>
               <Icon :name="node.icon" class="w-3 h-3 opacity-70 group-hover/node:opacity-100" />
             </div>
 
@@ -57,8 +59,9 @@
             </div>
 
             <div
-              v-if="activeNodeId === node.id"
-              class="absolute bottom-1 right-1 w-1.5 h-1.5 rounded-full bg-accent-blue shadow-sm shadow-accent-blue"
+              v-if="activeNodeId === node.id || (copied && node.id === 'contact')"
+              class="absolute bottom-1 right-1 w-1.5 h-1.5 rounded-full shadow-sm"
+              :class="copied && node.id === 'contact' ? 'bg-emerald-400 shadow-emerald-400' : 'bg-accent-blue shadow-accent-blue'"
             />
           </component>
         </div>
@@ -77,9 +80,11 @@
 
 <script setup lang="ts">
 const route = useRoute()
+const appConfig = useAppConfig()
 
 const isExpanded = ref(false)
 const scrollPercent = ref(0)
+const copied = ref(false)
 
 interface SpatialNode {
   id: string
@@ -90,12 +95,12 @@ interface SpatialNode {
   action?: () => void
 }
 
-const spatialNodes: SpatialNode[] = [
+const spatialNodes = computed<SpatialNode[]>(() => [
   { id: 'home', label: 'Home', coord: 'N-01', to: '/', icon: 'lucide:home' },
   { id: 'projects', label: 'Projects', coord: 'E-02', to: '/projects', icon: 'lucide:folder-git-2' },
   { id: 'about', label: 'About', coord: 'W-03', to: '/about', icon: 'lucide:user' },
-  { id: 'contact', label: 'Contact', coord: 'S-04', icon: 'lucide:mail', action: () => copyEmail() },
-]
+  { id: 'contact', label: copied.value ? 'Copied!' : 'Contact', coord: 'S-04', icon: copied.value ? 'lucide:check' : 'lucide:mail', action: () => copyEmail() },
+])
 
 const activeNodeId = computed(() => {
   if (route.path === '/') return 'home'
@@ -127,8 +132,11 @@ const handleNodeClick = (node: SpatialNode) => {
 
 const copyEmail = async () => {
   try {
-    await navigator.clipboard.writeText('hello@joshuatengker.com')
-    alert('Email copied to clipboard!')
+    await navigator.clipboard.writeText(appConfig.portfolio.social.email)
+    copied.value = true
+    setTimeout(() => {
+      copied.value = false
+    }, 2000)
   } catch (e) {
     console.error(e)
   }

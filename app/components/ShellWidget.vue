@@ -155,7 +155,7 @@ function handleUserCommand() {
       visibleLines.value.push({ type: 'output', text: 'Available commands: whoami, skills, contact, clear, help' })
       break
     case 'whoami':
-      visibleLines.value.push({ type: 'output', text: 'Joshua — Backend engineer focused on Go, TypeScript & Postgres' })
+      visibleLines.value.push({ type: 'output', text: 'Joshua Tengker — Backend engineer focused on Go, TypeScript & Postgres' })
       break
     case 'skills':
       visibleLines.value.push({ type: 'highlight', text: 'Go, TypeScript, Python, Gin, Nuxt, Postgres, Redis, Docker' })

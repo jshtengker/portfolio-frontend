@@ -1,5 +1,5 @@
 <template>
-  <section class="py-24 px-6">
+  <section class="py-24 px-6 sm:px-8 lg:px-12">
     <div class="max-w-7xl mx-auto">
       <p class="font-mono text-sm text-accent mb-2">&gt; about</p>
       <h1 class="text-3xl font-bold tracking-tight mt-6 font-sans">Joshua</h1>
@@ -99,7 +99,19 @@ const interests = [
   'Self-hosting',
 ]
 
+useSeoMeta({
+  title: 'About',
+  description: 'Learn more about Joshua Tengker, a backend-focused software engineer specializing in Go, TypeScript, APIs, and distributed systems.',
+  ogTitle: 'About Joshua Tengker | Backend Software Engineer',
+  ogDescription: 'Learn more about Joshua Tengker, a backend-focused software engineer specializing in Go, TypeScript, APIs, and distributed systems.',
+  ogUrl: 'https://jshtngkr.pages.dev/about',
+  ogType: 'profile',
+  twitterCard: 'summary',
+})
+
 useHead({
-  title: 'About — Joshua',
+  link: [
+    { rel: 'canonical', href: 'https://jshtngkr.pages.dev/about' },
+  ],
 })
 </script>
