@@ -15,9 +15,27 @@ ref="cardEl"
           transformOrigin: originCenter,
         }">
         <div class="flex items-start justify-between mb-4">
-          <h2 class="text-xl font-bold tracking-tight font-sans">
-            {{ project?.title }}
-          </h2>
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span
+                v-if="project?.liveUrl || project?.status === 'live'"
+                class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-mono border border-accent-blue/30 bg-accent-blue/10 text-accent-blue"
+              >
+                <span class="w-1.5 h-1.5 rounded-full bg-accent-blue animate-pulse" />
+                Live Demo Available
+              </span>
+              <span
+                v-else
+                class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-mono border border-zinc-800 bg-zinc-900/60 text-zinc-400"
+              >
+                <span class="w-1.5 h-1.5 rounded-full bg-amber-500/80" />
+                {{ project?.status === 'in-dev' ? 'In Development' : 'Demo Coming Soon' }}
+              </span>
+            </div>
+            <h2 class="text-xl font-bold tracking-tight font-sans">
+              {{ project?.title }}
+            </h2>
+          </div>
           <button
 class="text-zinc-600 hover:text-accent transition-colors text-lg leading-none ml-4"
             @click="onClose">
@@ -33,10 +51,12 @@ class="text-zinc-600 hover:text-accent transition-colors text-lg leading-none ml
           {{ project?.details }}
         </p>
 
-        <div class="flex flex-wrap gap-1.5 mt-6 mb-8">
+        <div class="flex flex-wrap gap-2 mt-6 mb-8">
           <span
-v-for="tag in project?.tags" :key="tag"
-            class="px-2 py-0.5 text-xs rounded bg-surface-alt text-zinc-500 font-mono">
+            v-for="tag in project?.tags"
+            :key="tag"
+            class="px-2.5 py-1 text-xs rounded-md border border-border/60 text-zinc-400 bg-surface-alt/50 font-mono transition-all duration-300 ease-out hover:border-accent hover:text-accent hover:bg-accent/10 hover:shadow-[0_4px_12px_rgba(200,134,74,0.2)] hover:-translate-y-0.5 hover:scale-105"
+          >
             {{ tag }}
           </span>
         </div>
@@ -45,7 +65,7 @@ v-for="tag in project?.tags" :key="tag"
           <span class="text-xs font-mono text-zinc-600">{{ project?.year }}</span>
           <div class="flex items-center gap-3">
             <a
-v-if="project?.githubUrl !== undefined"
+              v-if="project?.githubUrl !== undefined"
               :href="project?.githubUrl || '#'"
               :target="project?.githubUrl ? '_blank' : undefined"
               rel="noopener noreferrer"
@@ -54,8 +74,25 @@ v-if="project?.githubUrl !== undefined"
               <Icon name="simple-icons:github" class="w-4 h-4" />
               GitHub
             </a>
+            <a
+              v-if="project?.liveUrl"
+              :href="project.liveUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-1.5 px-3.5 py-2 border border-border text-zinc-300 rounded-lg hover:bg-surface-alt hover:text-accent transition-colors text-sm font-medium"
+              title="View live demo">
+              <Icon name="lucide:external-link" class="w-4 h-4" />
+              Live Demo
+            </a>
+            <span
+              v-else
+              class="inline-flex items-center gap-1.5 px-3.5 py-2 border border-border/50 text-zinc-600 rounded-lg cursor-not-allowed text-sm font-medium opacity-60"
+              title="Live demo coming soon">
+              <Icon name="lucide:external-link" class="w-4 h-4 opacity-50" />
+              Live Demo
+            </span>
             <NuxtLink
-:to="project?.to || '#'"
+              :to="project?.to || '#'"
               class="px-5 py-2 bg-accent text-black font-semibold rounded-lg hover:bg-accent/90 transition-colors text-sm">
               View project &rarr;
             </NuxtLink>
