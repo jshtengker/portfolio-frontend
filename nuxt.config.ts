@@ -24,6 +24,11 @@ export default defineNuxtConfig({
         { name: 'theme-color', content: '#09090b' },
         { name: 'author', content: 'Joshua Tengker' },
         { name: 'google-site-verification', content: 'google373c6438e429bba0' },
+        { property: 'og:site_name', content: 'Joshua Tengker' },
+        { property: 'og:title', content: 'Joshua Tengker | Backend Software Engineer' },
+        { property: 'og:description', content: 'Go & TypeScript Backend-focused software engineer. I build APIs, services, and systems that are reliable, observable, and actually ship.' },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:url', content: 'https://jshtngkr.pages.dev/' },
       ],
       link: [
         { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
@@ -32,6 +37,18 @@ export default defineNuxtConfig({
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },
         { rel: 'shortcut icon', href: '/favicon.svg' },
         { rel: 'apple-touch-icon', href: '/favicon.svg' },
+      ],
+      script: [
+        {
+          type: 'application/ld+json',
+          innerHTML: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            'name': 'Joshua Tengker',
+            'alternateName': ['Joshua Tengker Portfolio'],
+            'url': 'https://jshtngkr.pages.dev/',
+          }),
+        },
       ],
     },
   },
