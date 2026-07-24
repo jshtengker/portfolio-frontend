@@ -14,73 +14,90 @@ export const projects: Project[] = [
     year: '2026',
     to: '/projects/zetryn',
     githubUrl: 'https://github.com/jshtengker/zetryn',
+    status: 'coming-soon',
+    role: 'Lead Backend Engineer & Systems Architect',
+    problemStatement:
+      'Modern microservices generate millions of un-correlated telemetry signals during outages. Engineers waste valuable time manually cross-referencing trace IDs across log aggregators and metric tools to isolate root causes.',
+    architecture: {
+      overview:
+        'High-throughput telemetry ingestion pipeline built with Go worker pools, Redis stream buffers, and OpenTelemetry signal correlation engine.',
+      components: [
+        {
+          name: 'Ingestion Engine',
+          desc: 'Go-based HTTP/gRPC receiver handling high-concurrency OTEL signal batches with non-blocking worker pools.',
+        },
+        {
+          name: 'Correlation Pipeline',
+          desc: 'Asynchronous Redis stream consumer matching span IDs across distributed service boundaries.',
+        },
+        {
+          name: 'Operator Dashboard',
+          desc: 'PostgreSQL storage with optimized indexes & React console for live incident timelines.',
+        },
+      ],
+    },
+    features: [
+      {
+        title: 'Asynchronous Event Correlation',
+        desc: 'Automatically links isolated logs and metric spikes to open trace spans across microservices.',
+      },
+      {
+        title: 'Automated Root-Cause Alerts',
+        desc: 'Evaluates anomaly thresholds and triggers instant webhooks before cascading failures occur.',
+      },
+    ],
   },
   {
     id: 'speech-to-text',
-    title: 'Local Speech-to-Text Studio',
+    title: 'Speech-to-Text Studio',
     description:
-      'Privacy-first audio & video transcription app powered by faster-whisper with real-time SSE streaming.',
+      'Hybrid speech transcription & translation app with browser Web Audio extraction, Groq Cloud API, and DeepL translation.',
     fullDescription:
-      'A high-performance, local speech-to-text web application powered by OpenAI Whisper models via faster-whisper. Features real-time line-by-line SSE streaming, dynamic model selection, drag-and-drop media upload, and TXT/SRT export capabilities with zero data leaving the device.',
+      'A high-performance Speech-to-Text transcription and multi-language translation web application. Features client-side Web Audio API extraction (processes 1.4GB video to 16kHz WAV in <1s), an environment-aware hybrid engine (local faster-whisper CTranslate2 GPU execution locally, Groq Cloud API in production), real-time SSE line streaming, and DeepL / NLLB-200 transcript translation.',
     details:
-      'Built with Python and FastAPI on the backend for GPU/CPU accelerated CTranslate2 inference and SSE streaming endpoints. The frontend is built with React 18, TypeScript, Vite, and TailwindCSS for a responsive dark UI.',
-    tags: ['Python', 'FastAPI', 'Whisper', 'React', 'TypeScript', 'TailwindCSS'],
+      'Built with Python and FastAPI on the backend supporting local CTranslate2 inference or Groq Cloud API fallback. The frontend is built with React 18, TypeScript, Vite, Web Audio API, and TailwindCSS for a responsive dark UI.',
+    tags: ['Python', 'FastAPI', 'Whisper', 'React', 'TypeScript', 'Web Audio API', 'Groq API', 'DeepL API'],
     year: '2026',
     to: '/projects/speech-to-text',
     githubUrl: 'https://github.com/jshtengker/speech-to-text',
-  },
-  {
-    id: 'alpha',
-    title: 'Distributed Queue Service',
-    description:
-      'A RESTful API for managing distributed task queues with real-time status updates via WebSocket streams.',
-    fullDescription:
-      'A production-grade RESTful API service for managing distributed task queues with real-time status updates via WebSocket streams. Supports priority scheduling, retry with exponential backoff, dead-letter queues, and Prometheus metrics.',
-    details:
-      'Built with Go for high concurrency, PostgreSQL for durable storage, and Redis for fast in-memory queue operations. Deployed with Docker Compose, monitored via Prometheus and Grafana dashboards.',
-    tags: ['Go', 'PostgreSQL', 'Redis', 'Docker'],
-    year: '2026',
-    to: '/projects/alpha',
-  },
-  {
-    id: 'beta',
-    title: 'Auth Microservice',
-    description:
-      'Modular authentication service supporting OAuth2, JWT, and session-based auth with rate limiting.',
-    fullDescription:
-      'A modular authentication microservice that provides multiple auth strategies including OAuth2 (Google, GitHub), JWT-based tokens, and traditional session-based authentication with refresh token rotation.',
-    details:
-      'Built with TypeScript and Express. Implements rate limiting, audit logging, and comprehensive test coverage. Integrates with PostgreSQL for session storage and Redis for rate-limit counters.',
-    tags: ['TypeScript', 'Express', 'PostgreSQL', 'JWT'],
-    year: '2025',
-    to: '/projects/beta',
-  },
-  {
-    id: 'gamma',
-    title: 'Collaborative Editor Backend',
-    description:
-      'Real-time collaborative document editing using WebSockets and operational transform.',
-    fullDescription:
-      'A real-time collaborative editing backend that enables multiple users to edit documents simultaneously. Uses operational transform for conflict resolution with low-latency WebSocket communication.',
-    details:
-      'Built with Go for concurrent WebSocket handling, MongoDB for document storage, and a CRDT-inspired sync protocol for offline support and eventual consistency.',
-    tags: ['Go', 'WebSocket', 'MongoDB'],
-    year: '2025',
-    to: '/projects/gamma',
-  },
-  {
-    id: 'delta',
-    title: 'Scaffold CLI',
-    description:
-      'Command-line tool for scaffolding production-ready backend projects with built-in CI/CD.',
-    fullDescription:
-      'A CLI tool that scaffolds production-ready backend project templates with pre-configured CI/CD pipelines, Docker Compose setups, and monitoring stacks pre-wired.',
-    details:
-      'Built with Python and Click. Generates projects for Go, TypeScript, and Python backends with optional PostgreSQL, Redis, and Prometheus integrations.',
-    tags: ['Python', 'CLI', 'Docker', 'CI/CD'],
-    year: '2024',
-    to: '/projects/delta',
+    liveUrl: 'https://speech-to-text-one-pied.vercel.app/',
+    status: 'live',
+    role: 'Fullstack Systems Engineer',
+    problemStatement:
+      'Heavy video uploads choke network bandwidth and trigger storage limits, while cloud transcription services incur steep API fees. Traditional tools also lack client-side audio extraction, dynamic local/cloud engine switching, and automated multi-language translation.',
+    architecture: {
+      overview:
+        'Hybrid speech transcription architecture combining browser-side Web Audio extraction with FastAPI SSE streaming and environment-aware inference (local CTranslate2 GPU execution vs Groq Cloud API in production, plus DeepL/NLLB translation).',
+      components: [
+        {
+          name: 'Web Audio Extractor',
+          desc: 'Browser-side Web Audio API (OfflineAudioContext) downsampling multi-gigabyte media to 16kHz mono WAV in <1s before upload.',
+        },
+        {
+          name: 'FastAPI SSE Stream API',
+          desc: 'FastAPI job queue manager streaming line-by-line transcription updates to React via Server-Sent Events.',
+        },
+        {
+          name: 'Hybrid Inference Engine',
+          desc: 'Runs local faster-whisper (CTranslate2) on GPU in local dev, automatically switching to Groq Cloud API (Whisper Large-v3) in production.',
+        },
+      ],
+    },
+    features: [
+      {
+        title: 'Browser-Side Web Audio Extraction',
+        desc: 'Extracts and compresses speech audio from 1.4GB+ videos down to <45MB 16kHz WAV directly in browser memory in under 1 second.',
+      },
+      {
+        title: 'Hybrid Engine (Local GPU / Groq Cloud)',
+        desc: 'Leverages local faster-whisper (CTranslate2) for GPU inference locally, and seamlessly switches to Groq Cloud API for production deployment.',
+      },
+      {
+        title: 'Multi-Engine Transcript Translation',
+        desc: 'Translates completed transcriptions into multiple languages via DeepL API in production or Meta NLLB-200 locally, preserving subtitle timestamps.',
+      },
+    ],
   },
 ]
 
-export const featuredProjects: Project[] = projects.slice(0, 2)
+export const featuredProjects: Project[] = projects

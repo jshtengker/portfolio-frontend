@@ -67,7 +67,7 @@ to="/about"
             <ProjectCard v-for="p in featured" :key="p.title" :project="p" @select="onSelect" />
           </div>
           <NuxtLink
-to="/projects"
+            to="/projects"
             class="inline-block mt-8 text-sm text-zinc-500 font-mono hover:text-accent transition-colors">
             View all projects &rarr;
           </NuxtLink>
