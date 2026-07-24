@@ -9,6 +9,7 @@
         <div class="mt-10 grid md:grid-cols-2 gap-4">
           <ProjectCard v-for="p in projects" :key="p.title" :project="p" @select="onSelect" />
         </div>
+        <ProjectsUpcomingBanner />
       </SectionReveal>
     </div>
 
