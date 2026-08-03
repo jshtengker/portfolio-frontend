@@ -54,12 +54,12 @@
               </a>
 
               <a
-                href="/certificates.pdf"
-                download="certificates.pdf"
+                href="/Certificates.pdf"
+                download="Certificates.pdf"
                 class="inline-flex items-center gap-2 px-5 py-2.5 border border-border/80 text-zinc-300 hover:border-accent hover:text-accent rounded-lg hover:bg-accent/10 transition-all duration-300 font-mono text-xs hover:shadow-[0_0_20px_rgba(200,134,74,0.2)] hover:-translate-y-0.5 active:translate-y-0"
               >
                 <Icon name="lucide:file-down" class="w-4 h-4 text-accent" />
-                <span>Download Other Certificates (PDF)</span>
+                <span>Download Certificates (PDF)</span>
               </a>
             </div>
           </div>
