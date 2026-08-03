@@ -1,6 +1,5 @@
 <template>
   <div class="rounded-xl border border-border bg-[#0f0e0c] p-6 shadow-2xl space-y-6">
-    <!-- Header Bar -->
     <div class="flex items-center justify-between pb-4 border-b border-border/40 font-mono text-xs text-zinc-500">
       <div class="flex items-center gap-2">
         <span class="w-2.5 h-2.5 rounded-full bg-red-500/60" />
@@ -14,7 +13,6 @@
       </div>
     </div>
 
-    <!-- Interactive Nodes Pipeline Grid -->
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 relative py-2">
       <div
         v-for="(node, index) in activeNodes"
@@ -43,7 +41,6 @@
           {{ node.tech }}
         </p>
 
-        <!-- Flow Connector Arrow -->
         <div v-if="index < activeNodes.length - 1" class="hidden md:block absolute -right-3.5 top-1/2 -translate-y-1/2 z-10">
           <div class="w-3.5 h-3.5 rounded-full bg-surface border border-accent-blue/40 flex items-center justify-center text-accent-blue text-[10px]">
             &rarr;
@@ -52,7 +49,6 @@
       </div>
     </div>
 
-    <!-- Active Node Inspector Details -->
     <div v-if="currentNode" class="p-4 rounded-lg border border-accent-blue/30 bg-accent-blue/5 font-mono text-xs transition-all duration-300">
       <div class="flex items-center justify-between mb-2">
         <span class="text-accent font-semibold flex items-center gap-2">

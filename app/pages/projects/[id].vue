@@ -1,7 +1,6 @@
 <template>
   <section class="py-20 px-6 sm:px-8 lg:px-12 min-h-screen">
     <div class="max-w-4xl mx-auto">
-      <!-- Back Navigation & Meta Bar -->
       <div class="flex items-center justify-between mb-8">
         <NuxtLink
           to="/projects"
@@ -11,7 +10,6 @@
           <span>Back to projects</span>
         </NuxtLink>
 
-        <!-- Status Badge -->
         <div class="flex items-center gap-2">
           <span
             v-if="project?.liveUrl || project?.status === 'live'"
@@ -31,7 +29,6 @@
         </div>
       </div>
 
-      <!-- Hero Header & Title -->
       <div class="mb-12 border-b border-border pb-10">
         <div v-if="project?.role" class="inline-block px-2.5 py-0.5 rounded bg-surface-alt border border-border text-xs font-mono text-zinc-400 mb-3">
           {{ project.role }}
@@ -43,7 +40,6 @@
           {{ project?.fullDescription || project?.description }}
         </p>
 
-        <!-- Action Links -->
         <div class="flex flex-wrap items-center gap-3 mt-6">
           <a
             v-if="project?.liveUrl"
@@ -68,80 +64,89 @@
         </div>
       </div>
 
-
-
-      <!-- Problem Statement & Objectives -->
-      <div v-if="project?.problemStatement" class="mb-14 p-8 rounded-xl border border-border bg-surface/30">
-        <h2 class="text-xs font-mono text-accent uppercase tracking-wider mb-2">&gt; Context & Objectives</h2>
-        <h3 class="text-xl font-bold font-sans text-zinc-200 mb-3">Problem Statement</h3>
-        <p class="text-zinc-400 leading-relaxed text-sm sm:text-base">
+      <div v-if="project?.problemStatement" class="mb-14 relative pl-6 sm:pl-8 py-4 border-l-2 border-accent/60 group">
+        <div class="absolute -left-0.5 top-0 bottom-0 w-0.5 bg-linear-to-b from-accent via-amber-400 to-transparent group-hover:shadow-[0_0_12px_rgba(200,134,74,0.8)] transition-all duration-500" />
+        <h2 class="text-xs font-mono text-accent uppercase tracking-wider mb-2 flex items-center gap-2">
+          <span>&gt; 01. Context & Objectives</span>
+        </h2>
+        <h3 class="text-xl font-bold font-sans text-zinc-100 mb-3">Problem Statement</h3>
+        <p class="text-zinc-300 leading-relaxed text-base sm:text-lg font-sans">
           {{ project.problemStatement }}
         </p>
       </div>
 
-      <!-- Interactive Workflow Preview Simulator -->
       <div class="mb-14">
-        <h2 class="text-xs font-mono text-accent uppercase tracking-wider mb-2">&gt; Interactive Workflow Preview</h2>
+        <h2 class="text-xs font-mono text-accent uppercase tracking-wider mb-2">&gt; 02. Interactive Workflow Preview</h2>
         <h3 class="text-2xl font-bold font-sans text-zinc-100 mb-4">Application Lifecycle Simulation</h3>
         <AppWorkflowSimulator :project-id="project?.id" />
       </div>
 
-      <!-- System Architecture & Components -->
       <div v-if="project?.architecture" class="mb-14">
-        <h2 class="text-xs font-mono text-accent uppercase tracking-wider mb-2">&gt; System Architecture</h2>
+        <h2 class="text-xs font-mono text-accent uppercase tracking-wider mb-2">&gt; 03. System Architecture</h2>
         <h3 class="text-2xl font-bold font-sans text-zinc-100 mb-4">Engineering Blueprint</h3>
-        <p class="text-zinc-400 text-sm leading-relaxed mb-6">
+        <p class="text-zinc-400 text-sm leading-relaxed mb-6 font-sans">
           {{ project.architecture.overview }}
         </p>
 
-        <!-- Interactive Architecture Diagram -->
         <ProjectArchitectureDiagram :project-id="project?.id" class="mb-8" />
 
-        <!-- Architecture Components Grid -->
-        <div v-if="project.architecture.components?.length" class="grid md:grid-cols-3 gap-4">
+        <div v-if="project.architecture.components?.length" class="space-y-3 mt-6">
           <div
-            v-for="c in project.architecture.components"
+            v-for="(c, idx) in project.architecture.components"
             :key="c.name"
-            class="p-5 rounded-lg border border-border bg-surface/40 space-y-2"
+            class="group relative pl-6 py-3 border-l border-zinc-800 hover:border-accent hover:bg-zinc-900/30 transition-all duration-300 rounded-r-lg"
           >
-            <h4 class="font-semibold font-mono text-xs text-zinc-200 flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-accent" />
-              {{ c.name }}
-            </h4>
-            <p class="text-xs text-zinc-400 leading-relaxed">{{ c.desc }}</p>
+            <div class="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 sm:gap-4">
+              <h4 class="font-semibold font-mono text-sm text-zinc-200 group-hover:text-accent transition-colors flex items-center gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse shrink-0" />
+                <span class="text-xs text-zinc-500 font-mono">0{{ idx + 1 }}.</span>
+                <span>{{ c.name }}</span>
+              </h4>
+              <p class="text-xs sm:text-sm text-zinc-400 leading-relaxed sm:max-w-md pl-3.5 sm:pl-0 font-sans">
+                {{ c.desc }}
+              </p>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Tech Stack Badges -->
       <div class="mb-14">
-        <h2 class="text-xs font-mono text-accent uppercase tracking-wider mb-3">&gt; Technology Stack</h2>
+        <h2 class="text-xs font-mono text-accent uppercase tracking-wider mb-3">&gt; 04. Technology Stack</h2>
         <div class="flex flex-wrap gap-2.5">
           <span
             v-for="tag in project?.tags"
             :key="tag"
-            class="px-3.5 py-1.5 text-xs rounded-lg border border-border/80 text-zinc-300 bg-surface/60 font-mono transition-all duration-300 ease-out hover:border-accent hover:text-accent hover:bg-accent/10 hover:shadow-[0_4px_16px_rgba(200,134,74,0.25)] hover:-translate-y-1 hover:scale-105 cursor-default select-none"
+            class="py-1 px-2.5 text-xs font-mono text-zinc-400 hover:text-accent border-b border-zinc-800 hover:border-accent transition-all duration-300 cursor-default select-none flex items-center gap-1 group"
           >
-            {{ tag }}
+            <span class="text-accent/60 group-hover:text-accent transition-colors">#</span>
+            <span>{{ tag }}</span>
           </span>
         </div>
       </div>
 
-      <!-- Key Features Grid -->
       <div v-if="project?.features?.length" class="mb-14">
-        <h2 class="text-xs font-mono text-accent uppercase tracking-wider mb-2">&gt; Highlights</h2>
-        <h3 class="text-2xl font-bold font-sans text-zinc-100 mb-6">Key Engineering Features</h3>
-        <div class="grid md:grid-cols-2 gap-4">
+        <h2 class="text-xs font-mono text-accent uppercase tracking-wider mb-2">&gt; 05. Key Highlights</h2>
+        <h3 class="text-2xl font-bold font-sans text-zinc-100 mb-6">Engineering Specifications</h3>
+        <div class="divide-y divide-border/40 border-t border-b border-border/40">
           <div
-            v-for="f in project.features"
+            v-for="(f, idx) in project.features"
             :key="f.title"
-            class="p-6 rounded-xl border border-border bg-surface/40 space-y-2"
+            class="group py-5 px-3 hover:bg-zinc-900/40 transition-all duration-300 rounded-lg"
           >
-            <h4 class="font-bold font-sans text-zinc-200 text-base flex items-center gap-2">
-              <Icon name="lucide:check-circle-2" class="w-4 h-4 text-accent shrink-0" />
-              {{ f.title }}
-            </h4>
-            <p class="text-sm text-zinc-400 leading-relaxed pl-6">{{ f.desc }}</p>
+            <div class="flex items-start gap-4">
+              <span class="text-xs font-mono text-accent shrink-0 pt-1 group-hover:translate-x-1 transition-transform">
+                // 0{{ idx + 1 }}
+              </span>
+              <div class="space-y-1">
+                <h4 class="font-bold font-sans text-zinc-100 text-base group-hover:text-accent group-hover:translate-x-1 transition-all duration-300 flex items-center gap-2">
+                  <span>{{ f.title }}</span>
+                  <Icon name="lucide:arrow-right" class="w-3.5 h-3.5 text-accent opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                </h4>
+                <p class="text-sm text-zinc-400 leading-relaxed font-sans">
+                  {{ f.desc }}
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
