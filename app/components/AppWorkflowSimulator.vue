@@ -1,6 +1,5 @@
 <template>
   <div class="rounded-xl border border-border bg-[#0f0e0c] p-6 shadow-2xl space-y-6">
-    <!-- Window Bar & Stage Control Tabs -->
     <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-border/40 font-mono text-xs">
       <div class="flex items-center gap-2 text-zinc-500">
         <span class="w-2.5 h-2.5 rounded-full bg-red-500/60" />
@@ -14,7 +13,6 @@
           <span class="w-1.5 h-1.5 rounded-full bg-accent animate-ping" />
           <span>AUTO PLAYING</span>
         </div>
-        <!-- Stage Selector Buttons -->
         <div class="flex items-center gap-1 bg-surface p-1 rounded-lg border border-border">
           <button
             v-for="(s, idx) in activeStages"
@@ -34,11 +32,8 @@
       </div>
     </div>
 
-    <!-- Active Stage Viewer Box -->
     <div class="min-h-55 flex flex-col justify-center relative">
-      <!-- STAGE CONTENT DISPLAY -->
       <div v-if="currentStepData" class="space-y-4">
-        <!-- Stage Title & Status Indicator -->
         <div class="flex items-center justify-between font-mono text-xs">
           <span class="text-accent font-semibold flex items-center gap-2">
             <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
@@ -47,16 +42,13 @@
           <span class="text-[10px] text-zinc-500 font-mono">{{ currentStepData.techTag }}</span>
         </div>
 
-        <!-- SPEECH-TO-TEXT SIMULATION STAGES -->
         <template v-if="isSpeechToText">
-          <!-- Stage 0: Upload -->
           <div v-if="currentStep === 0" class="p-8 border-2 border-dashed border-accent/40 rounded-xl text-center bg-accent/5 transition-all">
             <Icon name="lucide:file-video" class="w-10 h-10 text-accent mx-auto mb-2 animate-bounce" />
             <p class="font-mono text-xs text-zinc-200 font-bold mb-1">interview_recording_1080p.mp4 (1.4 GB)</p>
             <span class="text-[11px] font-mono text-accent">File ingested into memory dropzone &rarr;</span>
           </div>
 
-          <!-- Stage 1: Web Audio Extraction -->
           <div v-else-if="currentStep === 1" class="space-y-3 p-6 bg-surface/50 rounded-xl border border-border font-mono text-xs">
             <div class="flex justify-between text-zinc-300">
               <span class="flex items-center gap-2">
@@ -73,7 +65,6 @@
             </p>
           </div>
 
-          <!-- Stage 2: Real-time SSE Stream -->
           <div v-else-if="currentStep === 2" class="p-5 bg-surface/60 rounded-xl border border-border font-mono text-xs space-y-3">
             <div class="text-accent-blue flex items-center justify-between pb-2 border-b border-border/40 text-[11px]">
               <span class="flex items-center gap-1.5">
@@ -88,7 +79,6 @@
             </div>
           </div>
 
-          <!-- Stage 3: DeepL Translation -->
           <div v-else-if="currentStep === 3" class="p-5 bg-surface/60 rounded-xl border border-border font-mono text-xs space-y-3">
             <div class="text-accent flex items-center justify-between pb-2 border-b border-border/40 text-[11px]">
               <span class="flex items-center gap-1.5">
@@ -104,9 +94,7 @@
           </div>
         </template>
 
-        <!-- ZETRYN SIMULATION STAGES -->
         <template v-else>
-          <!-- Stage 0: Ingestion -->
           <div v-if="currentStep === 0" class="p-6 bg-surface/50 rounded-xl border border-border font-mono text-xs space-y-3">
             <div class="flex justify-between text-zinc-300">
               <span class="text-accent font-semibold">&gt; OpenTelemetry Collector (Go gRPC)</span>
@@ -117,7 +105,6 @@
             </div>
           </div>
 
-          <!-- Stage 1: Redis Stream Buffer -->
           <div v-else-if="currentStep === 1" class="p-6 bg-surface/50 rounded-xl border border-border font-mono text-xs space-y-3">
             <div class="flex justify-between text-zinc-300">
               <span class="text-accent-blue font-semibold">&gt; Redis Stream Buffer Queue</span>
@@ -128,7 +115,6 @@
             </div>
           </div>
 
-          <!-- Stage 2: Span Correlation -->
           <div v-else-if="currentStep === 2" class="p-6 bg-surface/50 rounded-xl border border-border font-mono text-xs space-y-3">
             <div class="flex justify-between text-zinc-300">
               <span class="text-amber-400 font-semibold">&gt; Correlation Engine (Go errgroup)</span>
@@ -139,7 +125,6 @@
             </p>
           </div>
 
-          <!-- Stage 3: Incident Detection -->
           <div v-else-if="currentStep === 3" class="p-6 bg-surface/50 rounded-xl border border-border font-mono text-xs space-y-3">
             <div class="flex justify-between text-accent">
               <span class="font-semibold flex items-center gap-1.5">
@@ -154,7 +139,6 @@
           </div>
         </template>
 
-        <!-- Stage Description Footer -->
         <p class="text-xs text-zinc-400 font-sans leading-relaxed pt-2 border-t border-border/40">
           {{ currentStepData.description }}
         </p>

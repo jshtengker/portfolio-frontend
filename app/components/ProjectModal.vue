@@ -1,21 +1,33 @@
 <template>
   <Teleport to="body">
     <div
-v-if="project || closing"
+      v-if="project || closing"
       class="fixed inset-0 z-50 flex items-center justify-center p-4"
-      :style="{ background: overlayBg, backdropFilter: 'blur(4px)', transition: 'background 0.15s ease' }"
+      :style="{ background: overlayBg, backdropFilter: 'blur(8px)', transition: 'background 0.2s ease' }"
       @click.self="onClose">
       <div
-ref="cardEl"
-        class="w-full max-w-lg border border-border rounded-xl p-8 bg-surface shadow-2xl"
+        ref="cardEl"
+        class="w-full max-w-xl border-l-2 border-accent bg-zinc-950/95 backdrop-blur-xl p-6 sm:p-8 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.9)] relative overflow-hidden"
         :style="{
           transform: `scale(${scale}) translateY(${translateY}px)`,
           opacity,
-          transition: 'transform 0.15s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.15s ease',
+          transition: 'transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease',
           transformOrigin: originCenter,
         }">
-        <div class="flex items-start justify-between mb-4">
-          <div class="space-y-1">
+        <div class="flex items-center justify-between pb-3 border-b border-border/40 mb-5">
+          <div class="flex items-center gap-2 text-xs font-mono text-zinc-500">
+            <span class="text-accent">&gt;</span>
+            <span>project.quick_inspect("{{ project?.id }}")</span>
+          </div>
+          <button
+            class="text-zinc-500 hover:text-accent transition-colors text-lg leading-none p-1"
+            @click="onClose">
+            &times;
+          </button>
+        </div>
+
+        <div class="space-y-4">
+          <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
               <span
                 v-if="project?.liveUrl || project?.status === 'live'"
@@ -32,71 +44,63 @@ ref="cardEl"
                 {{ project?.status === 'in-dev' ? 'In Development' : 'Demo Coming Soon' }}
               </span>
             </div>
-            <h2 class="text-xl font-bold tracking-tight font-sans">
-              {{ project?.title }}
-            </h2>
+            <span class="text-xs font-mono text-zinc-600">{{ project?.year }}</span>
           </div>
-          <button
-class="text-zinc-600 hover:text-accent transition-colors text-lg leading-none ml-4"
-            @click="onClose">
-            &times;
-          </button>
+
+          <h2 class="text-2xl font-bold tracking-tight font-sans text-zinc-100">
+            {{ project?.title }}
+          </h2>
+
+          <p class="text-zinc-300 leading-relaxed text-sm">
+            {{ project?.fullDescription || project?.description }}
+          </p>
+
+          <p v-if="project?.details" class="text-xs text-zinc-400 leading-relaxed pt-2 border-t border-border/20">
+            {{ project?.details }}
+          </p>
+
+          <div class="flex flex-wrap gap-2 pt-2">
+            <span
+              v-for="tag in project?.tags"
+              :key="tag"
+              class="py-0.5 px-2 text-xs font-mono text-zinc-400 border-b border-zinc-800 hover:text-accent transition-colors"
+            >
+              # {{ tag }}
+            </span>
+          </div>
         </div>
 
-        <p class="text-zinc-400 leading-relaxed mb-2">
-          {{ project?.fullDescription || project?.description }}
-        </p>
-
-        <p class="text-sm text-zinc-500 leading-relaxed mt-3">
-          {{ project?.details }}
-        </p>
-
-        <div class="flex flex-wrap gap-2 mt-6 mb-8">
-          <span
-            v-for="tag in project?.tags"
-            :key="tag"
-            class="px-2.5 py-1 text-xs rounded-md border border-border/60 text-zinc-400 bg-surface-alt/50 font-mono transition-all duration-300 ease-out hover:border-accent hover:text-accent hover:bg-accent/10 hover:shadow-[0_4px_12px_rgba(200,134,74,0.2)] hover:-translate-y-0.5 hover:scale-105"
-          >
-            {{ tag }}
-          </span>
-        </div>
-
-        <div class="flex items-center justify-between pt-4 border-t border-border">
-          <span class="text-xs font-mono text-zinc-600">{{ project?.year }}</span>
+        <div class="flex items-center justify-between pt-6 mt-6 border-t border-border/40">
           <div class="flex items-center gap-3">
             <a
               v-if="project?.githubUrl !== undefined"
               :href="project?.githubUrl || '#'"
               :target="project?.githubUrl ? '_blank' : undefined"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 px-3.5 py-2 border border-border text-zinc-300 rounded-lg hover:bg-surface-alt hover:text-accent transition-colors text-sm font-medium"
+              class="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-400 hover:text-accent transition-colors"
               :title="project?.githubUrl ? 'View GitHub repository' : 'GitHub repo link coming soon'">
               <Icon name="simple-icons:github" class="w-4 h-4" />
-              GitHub
+              <span>Source</span>
             </a>
             <a
               v-if="project?.liveUrl"
               :href="project.liveUrl"
               target="_blank"
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-1.5 px-3.5 py-2 border border-border text-zinc-300 rounded-lg hover:bg-surface-alt hover:text-accent transition-colors text-sm font-medium"
+              class="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-400 hover:text-accent transition-colors"
               title="View live demo">
               <Icon name="lucide:external-link" class="w-4 h-4" />
-              Live Demo
+              <span>Live Demo</span>
             </a>
-            <span
-              v-else
-              class="inline-flex items-center gap-1.5 px-3.5 py-2 border border-border/50 text-zinc-600 rounded-lg cursor-not-allowed text-sm font-medium opacity-60"
-              title="Live demo coming soon">
-              <Icon name="lucide:external-link" class="w-4 h-4 opacity-50" />
-              Live Demo
-            </span>
-            <NuxtLink
-              :to="project?.to || '#'"
-              class="px-5 py-2 bg-accent text-black font-semibold rounded-lg hover:bg-accent/90 transition-colors text-sm">
-              View project &rarr;
-            </NuxtLink>
           </div>
+
+          <NuxtLink
+            :to="project?.to || '#'"
+            class="inline-flex items-center gap-2 px-4 py-2 bg-accent text-black font-semibold rounded-lg hover:bg-accent/90 transition-all text-xs font-mono"
+            @click="onClose">
+            <span>Full Specs</span>
+            <span>&rarr;</span>
+          </NuxtLink>
         </div>
       </div>
     </div>

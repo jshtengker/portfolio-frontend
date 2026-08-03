@@ -63,7 +63,7 @@ to="/about"
           <h2 class="text-2xl font-bold tracking-tight mt-6 font-sans">
             Recent projects
           </h2>
-          <div class="mt-8 grid md:grid-cols-2 gap-4">
+          <div class="mt-8 space-y-2 border-t border-border/40">
             <ProjectCard v-for="p in featured" :key="p.title" :project="p" @select="onSelect" />
           </div>
           <NuxtLink
