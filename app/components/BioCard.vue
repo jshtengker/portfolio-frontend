@@ -6,7 +6,7 @@
         <div class="grid md:grid-cols-5 gap-12 mt-6">
           <div class="md:col-span-3 space-y-4">
             <h2 class="text-2xl font-bold tracking-tight font-sans">
-              Backend engineer by trade
+              Backend Engineer
             </h2>
             <p class="text-zinc-400 leading-relaxed">
               I build the server-side of things — APIs, data pipelines,
@@ -19,10 +19,10 @@
               production.
             </p>
           </div>
-          <div class="md:col-span-2 border border-border rounded-lg p-5 bg-surface space-y-3 transition-all duration-300 hover:border-accent-dim/60 hover:shadow-[0_0_20px_rgba(200,134,74,0.15)]">
-            <div v-for="stat in stats" :key="stat.label" class="flex items-center justify-between">
-              <span class="text-sm text-zinc-500 font-mono">{{ stat.label }}</span>
-              <span class="text-sm font-medium">{{ stat.value }}</span>
+          <div class="md:col-span-2 border-l border-zinc-800/80 pl-6 space-y-5 flex flex-col justify-center">
+            <div v-for="stat in stats" :key="stat.label" class="group">
+              <span class="block text-xs font-mono text-zinc-500 uppercase tracking-wider mb-0.5">&gt; {{ stat.label }}</span>
+              <span class="text-sm font-mono text-zinc-200 group-hover:text-accent transition-colors font-medium">{{ stat.value }}</span>
             </div>
           </div>
         </div>
